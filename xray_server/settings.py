@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#ln2=yw+er@ou5cxyx=gao_=&!yp()5b-#(l$mk67k)8^%xm)t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['xrayserver.herokuapp.com']
 
 
 # Application definition
