@@ -13,7 +13,7 @@ import tensorflow as tf
 
 model_path = './data/output_graph.pb'
 labels_path = './data/output_labels.txt'
-image_path = './data/B0046_0012.jpg'
+image_path = './data/'
 
 class Predictor(object):
     def __init__(self):
@@ -28,14 +28,13 @@ class Predictor(object):
         self.labels = [str(w).replace("\n", "") for w in lines]
         self.sess = tf.Session()
 
-    def predict(self):
+    def predict(self, image):
         if not tf.gfile.Exists(image_path):
             tf.logging.fatal('File does not exist %s', image_path)
 
-        image_data = tf.gfile.FastGFile(image_path, 'rb').read()
+        image_data = tf.gfile.FastGFile(image_path + image, 'rb').read()
 
         softmax_tensor = self.sess.graph.get_tensor_by_name('final_result:0')
-        mul = self.sess.graph.get_tensor_by_name('DecodeJpeg/contents:0')
         predictions = self.sess.run(softmax_tensor,
                                {'DecodeJpeg/contents:0': image_data})
         predictions = np.squeeze(predictions)
@@ -45,11 +44,9 @@ class Predictor(object):
 predictor = Predictor()
 
 def predict(request):
-    return predictor.predict()
+    return predictor.predict(request.GET.get('image', 'B0046_0012.jpg'))
 
 
-if __name__ == '__main__':
-    print (predict(None))
 
 
 

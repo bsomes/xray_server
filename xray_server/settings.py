@@ -25,7 +25,7 @@ SECRET_KEY = '#ln2=yw+er@ou5cxyx=gao_=&!yp()5b-#(l$mk67k)8^%xm)t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['xrayserver.herokuapp.com']
+ALLOWED_HOSTS = ['xrayserver.herokuapp.com', 'localhost']
 
 
 # Application definition
