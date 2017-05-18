@@ -44,7 +44,9 @@ class Predictor(object):
 predictor = Predictor()
 
 def predict(request):
-    return predictor.predict(request.GET.get('image', 'B0046_0012.jpg'))
+    response = predictor.predict(request.GET.get('image', 'B0046_0012.jpg'))
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 
