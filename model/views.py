@@ -36,8 +36,8 @@ class Predictor(object):
             image_data = im.read()
 
         softmax_tensor = self.sess.graph.get_tensor_by_name('final_result:0')
-        predictions = self.sess.run(softmax_tensor,
-                               {'DecodeJpeg/contents:0': image_data})
+        feed_dict = {'DecodeJpeg/contents:0': image_data}
+        predictions = self.sess.run(softmax_tensor, feed_dict=feed_dict)
         predictions = np.squeeze(predictions)
         return JsonResponse({'prediction': [{self.labels[id]: str(val)} for (id, val) in enumerate(predictions)]})
 
