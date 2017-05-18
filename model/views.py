@@ -32,7 +32,8 @@ class Predictor(object):
         if not tf.gfile.Exists(image_path):
             tf.logging.fatal('File does not exist %s', image_path)
 
-        image_data = tf.gfile.FastGFile(image_path + image, 'rb').read()
+        with tf.gfile.FastGFile(image_path + image, 'rb') as im:
+            image_data = im.read()
 
         softmax_tensor = self.sess.graph.get_tensor_by_name('final_result:0')
         predictions = self.sess.run(softmax_tensor,
